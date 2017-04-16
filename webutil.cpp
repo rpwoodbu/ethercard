@@ -14,6 +14,7 @@ void EtherCard::copyMac (uint8_t *dst, const uint8_t *src) {
     memcpy(dst, src, ETH_LEN);
 }
 
+#if ETHERCARD_SERIAL
 void EtherCard::printIp (const char* msg, const uint8_t *buf) {
     Serial.print(msg);
     EtherCard::printIp(buf);
@@ -33,6 +34,7 @@ void EtherCard::printIp (const uint8_t *buf) {
             Serial.print('.');
     }
 }
+#endif  // ETHERCARD_SERIAL
 
 // search for a string of the form key=value in
 // a string that looks like q?xyz=abc&uvw=defgh HTTP/1.1\r\n

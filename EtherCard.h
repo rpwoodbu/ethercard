@@ -83,6 +83,12 @@
 */
 #define ETHERCARD_STASH 1
 
+/** Enable serial debugging functions.
+    Settings this to zero eliminates the existence of serial debugging
+    functions, allowing fewer Ardiuno library files to be linked in.
+*/
+#define ETHERCARD_SERIAL 0
+
 
 /** This type definition defines the structure of a UDP server event handler callback funtion */
 typedef void (*UdpServerCallback)(
@@ -568,6 +574,7 @@ public:
     */
     static void copyMac (uint8_t *dst, const uint8_t *src);
 
+#if ETHERCARD_SERIAL
     /**   @brief  Output to serial port in dotted decimal IP format
     *     @param  buf Pointer to 4 byte IP address
     *     @note   There is no check of source or destination size. Ensure both are 4 bytes
@@ -588,6 +595,7 @@ public:
     *     @todo   What is a FlashStringHelper?
     */
     static void printIp (const __FlashStringHelper *ifsh, const uint8_t *buf);
+#endif  // ETHERCARD_SERIAL
 
     /**   @brief  Search for a string of the form key=value in a string that looks like q?xyz=abc&uvw=defgh HTTP/1.1\\r\\n
     *     @param  str Pointer to the null terminated string to search
