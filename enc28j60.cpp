@@ -371,6 +371,7 @@ static void writePhy (byte address, uint16_t data) {
         ;
 }
 
+#include <util/delay.h>
 byte ENC28J60::initialize (uint16_t size, const byte* macaddr, byte csPin) {
     bufferSize = size;
     if (bitRead(SPCR, SPE) == 0)
@@ -380,7 +381,7 @@ byte ENC28J60::initialize (uint16_t size, const byte* macaddr, byte csPin) {
     disableChip();
 
     writeOp(ENC28J60_SOFT_RESET, 0, ENC28J60_SOFT_RESET);
-    delay(2); // errata B7/2
+    _delay_ms(2); // errata B7/2
     while (!readOp(ENC28J60_READ_CTRL_REG, ESTAT) & ESTAT_CLKRDY)
         ;
 
